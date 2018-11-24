@@ -13,13 +13,27 @@
 
       <div class="dropDowns">
         <label for="building">Building: </label>
-        <select id="building" name="building">
-          <option>AJC(429)</option>
-          <option>AVW(115)</option>
-          <option>CSI(406)</option>
-          <option>ESJ(226)</option>
-          <option>KEB(225)</option>
-          <option>IRB(423)</option>
+        
+        <select id="building" name="building" required>
+          <?php
+            // Include the database login credentials file.
+            require("dbLogin.php");
+
+            // Connect to the database.
+            $db_connection = new mysqli($host, $user, $password, $database);
+
+            // Query the database for the list of buildings.
+            $query = "select Name from buildings;";
+            $results = mysqli_query($db_connection, $query);
+
+            // Display the buildings from the database.
+            while ($row = mysqli_fetch_array($results, MYSQLI_ASSOC)){
+              print ("<option>".$row['Name']."</option>");
+            }
+
+            // Close the connection.
+            $db_connection->close();
+          ?>
         </select><br><br>
 
         <label for="illness">Illness: </label>
@@ -35,22 +49,22 @@
 
       <div id="duration" class="radioGroup">
         <label for="duration">Duration of Illness: </label><br>
-        <input type="radio" name="duration" value=10> 1 to 2 Days<br>
-        <input type="radio" name="duration" value=5> 3 to 5 Days<br>
-        <input type="radio" name="duration" value=1> 5+ Days<br>
+        <input type="radio" name="duration" value='1 to 2 Days' required> 1 to 2 Days<br>
+        <input type="radio" name="duration" value='3 to 4 Days'> 3 to 4 Days<br>
+        <input type="radio" name="duration" value='5+ Days'> 5+ Days<br>
       </div><br>
 
       <div id="doctor" class="radioGroup">
         <label for="doctor">Doctor Verified? </label><br>
-        <input type="radio" name="doctor" value=1> Yes<br>
-        <input type="radio" name="doctor" value=2> No<br>
+        <input type="radio" name="doctor" value='Yes' required> Yes<br>
+        <input type="radio" name="doctor" value='No'> No<br>
       </div><br>
 
       <div id="date">
         <label for="datepicker">Date of Building Entry: </label><br>
         <?php
           $date = date('m/d/Y', time());
-          echo "<input type='text' id='datepicker' value='$date'>";
+          echo "<input type='text' name='date' id='datepicker' value='$date'>";
         ?>
       </div><br>
 

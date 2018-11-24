@@ -1,6 +1,6 @@
 <?php
 	$host = "localhost";
-	$user = "";
-	$password = "";
-	$database = "buildingRecordsUMD";
+	$user = "dbuser";
+	$password = "goodbyeworld";
+	$database = "BuildingRecordsUMD";
 ?>
