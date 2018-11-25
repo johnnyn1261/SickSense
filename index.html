@@ -18,33 +18,40 @@
 
   <body>
 
-      <h1>Our Project</h1>
+    <br>
+    <h1>SickSense</h1>
+    <div class="card">
+      <div class="card-body">
+        <h5 class="card-title">Welcome to the Illness Reporting Service of UMD</h5>
+        <!--<h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>-->
+        <p class="card-text">SickSense is a responsive and interactive website that allows users to submit entries detailing a sickness they currently have and what building across the University of Maryland campus they have entered. It also allows users to view summarized reports to take precautions prior to entering a building.</p>
 
-      <div class="card">
-        <div class="card-body">
-          <h5 class="card-title">Card title</h5>
-          <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
-          <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+        <div class="mainButtons">
 
-          <div class="mainButtons">
+          <button type="button" class="mainOption btn-primary" onclick="location.href = 'illnessForm.php';" name="submit" style="margin: 5px">
+            <a href="illnessForm.php" style="text-decoration: none; color: #fff;">Submit an Illness</a>
+          </button><br>
 
-            <form action="illnessForm.php" method="post">
-              <button type="submit" class="mainOption btn-danger">Form</button>
-            </form>
+          <button type="button" class="mainOption btn-primary" onclick="location.href = 'illnessForm.php';" name="review" style="margin: 5px">
+            <a href="illnessForm.php" style="text-decoration: none; color: #fff;">Generate Report</a>
+          </button><br>
 
-            <form action="illnessForm.php" method="post">
-              <button type="submit" class="mainOption btn-warning">Generate</button>
-            </form>
+          <button type="button" class="mainOption btn-primary" onclick="location.href = './Admin/adminOptions.php';" name="update" style="margin: 5px">
+            <a href="Admin/adminOptions.html" style="text-decoration: none; color: #fff;">Administrative</a>
+          </button><br>
 
-            <form action="illnessForm.php" method="post">
-              <button type="submit" class="mainOption btn-dark">Admin</button>
-            </form>
+          <button type="submit" id="about" class="mainOption btn-primary" name="about" style="margin: 5px">About</button>
+          <script>
+            document.getElementById("about").onclick = function() {displayAbout()};
 
-          </div>
+            function displayAbout() {
+                window.alert("Credits:\nVan-Nhan Nguyen (https://github.com/johnnyn1261)\nIsrael Endegena (https://github.com/israelEn)\nJeffrey Sweene (https://github.com/jrSweeney)\nEnock Gansou (https://github.com/egansou)\nKasim Helil (https://github.com/kasimhelil)");
+            }
+          </script>
 
         </div>
       </div>
-
+    </div>
   </body>
 
   <!-- JavaScripts -->
@@ -53,54 +60,3 @@
   <script src="js/script.js"></script>
 
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<!--
-<div class="card text-center">
-  <div class="card-header">
-    <ul class="nav nav-tabs card-header-tabs">
-      <li class="nav-item">
-        <a class="nav-link" href="#">Active</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link active" href="www.google.com">Link</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link disabled" href="#">Disabled</a>
-      </li>
-    </ul>
-  </div>
-  <div class="card-body">
-    <h5 class="card-title">Special title treatment</h5>
-    <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-    <a href="#" class="btn btn-primary">Go somewhere</a>
-  </div>
-</div>
--->

@@ -13,7 +13,7 @@
 
       <div class="dropDowns">
         <label for="building">Building: </label>
-        
+
         <select id="building" name="building" required>
           <?php
             // Include the database login credentials file.
