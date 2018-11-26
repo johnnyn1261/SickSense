@@ -2,14 +2,13 @@
 <html lang="en" dir="ltr">
   <head>
     <meta charset="utf-8">
-    <title>TimeInOut</title>
+    <title>SickSense</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <meta name="description" content="A timesheet website">
     <meta name="keywords" content="html5, css3, bootstrap, php, js, firebase">
     <meta name="author" content="Van-Nhan, Jeff, Israel, Kasim, Enock">
 
-    <link rel="shortcut icon" type="image/png" href="img/logo.png">
+    <link rel="shortcut icon" type="image/png" href="sickSense.png">
 
     <!-- CSS Stylesheets -->
     <link rel="stylesheet" href="css/style.css">
@@ -30,24 +29,20 @@
 
           <button type="button" class="mainOption btn-primary" onclick="location.href = 'illnessForm.php';" name="submit" style="margin: 5px">
             <a href="illnessForm.php" style="text-decoration: none; color: #fff;">Submit an Illness</a>
-          </button><br>
+          </button>
 
           <button type="button" class="mainOption btn-primary" onclick="location.href = 'illnessForm.php';" name="review" style="margin: 5px">
             <a href="illnessForm.php" style="text-decoration: none; color: #fff;">Generate Report</a>
-          </button><br>
+          </button>
 
-          <button type="button" class="mainOption btn-primary" onclick="location.href = './Admin/adminOptions.php';" name="update" style="margin: 5px">
+          <button type="button" class="mainOption btn-primary" onclick="location.href = 'Admin/adminOptions.html';" name="update" style="margin: 5px">
             <a href="Admin/adminOptions.html" style="text-decoration: none; color: #fff;">Administrative</a>
-          </button><br>
+          </button>
 
-          <button type="submit" id="about" class="mainOption btn-primary" name="about" style="margin: 5px">About</button>
-          <script>
-            document.getElementById("about").onclick = function() {displayAbout()};
+          <button type="submit" id="about" class="mainOption btn-primary" name="about" onclick="location.href = 'about.html';" style="margin: 5px">
+          <a href="about.html" style="text-decoration: none; color: #fff;">About</a>
+          </button>
 
-            function displayAbout() {
-                window.alert("Credits:\nVan-Nhan Nguyen (https://github.com/johnnyn1261)\nIsrael Endegena (https://github.com/israelEn)\nJeffrey Sweene (https://github.com/jrSweeney)\nEnock Gansou (https://github.com/egansou)\nKasim Helil (https://github.com/kasimhelil)");
-            }
-          </script>
 
         </div>
       </div>

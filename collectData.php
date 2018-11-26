@@ -2,70 +2,92 @@
 <html lang="en" dir="ltr">
   <head>
     <meta charset="utf-8">
-    <title></title>
+    <title>SickSense</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="keywords" content="html5, css3, bootstrap, php, js, firebase">
+    <meta name="author" content="Van-Nhan, Jeff, Israel, Kasim, Enock">
+
+    <link rel="shortcut icon" type="image/png" href="sickSense.png">
+
+    <!-- CSS Stylesheets -->
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/bootstrap.css">
   </head>
   <body>
-    <form action="index.html" method='post'>
 
-      <?php
-        // Connect to the database.
-        require("dbLogin.php");
-        $db_connection = new mysqli($host, $user, $password, $database);
+    <br>
+      <h1>SickSense</h1>
+      <div class="card">
+      <div class="card-body">
+      <h5 class="card-title">The following data has been entered to the database:</h5>
+      <br>
+      <form action="index.html" method='post'>
 
-        // Collect the data provides.
-        $building = $_POST["building"];
-        $illness = $_POST["illness"];
-        $duration = $_POST["duration"];
-        $doctor = $_POST["doctor"];
-        $date = $_POST['date'];
+        <?php
+          // Connect to the database.
+          require("dbLogin.php");
+          $db_connection = new mysqli($host, $user, $password, $database);
 
-        // Get the corresponding building code.
-        $code = getBuildingCode($db_connection, $building);
+          // Collect the data provides.
+          $building = $_POST["building"];
+          $illness = $_POST["illness"];
+          $duration = $_POST["duration"];
+          $doctor = $_POST["doctor"];
+          $date = $_POST['date'];
 
-        // Calculate the severity score.
-        $severity = illnessScore($illness) * durationScore($duration) * verificationScore($doctor);
+          // Get the corresponding building code.
+          $code = getBuildingCode($db_connection, $building);
 
-        // Store the verification as a boolean.
-        $verified = ($doctor === 'Yes') ? ("true") : ("false");
+          // Calculate the severity score.
+          $severity = illnessScore($illness) * durationScore($duration) * verificationScore($doctor);
 
-        // Store the date as SQL format.
-        $first = substr($date, 0, 5);
-        $second = substr($date, 6, 10);
-        $date = $second.'/'.$first;
+          // Store the verification as a boolean.
+          $verified = ($doctor === 'Yes') ? ("true") : ("false");
 
-        // Insert the record into the database.
-        $query = "insert into Records values(".$code.", ".$severity.", '".$illness."', ".$verified.", '".$date."');";
-        $db_connection->query($query);
+          // Store the date as SQL format.
+          $first = substr($date, 0, 5);
+          $second = substr($date, 6, 10);
+          $date = $second.'/'.$first;
 
-        // Close the connection.
-        $db_connection->close();
+          // Insert the record into the database.
+          $query = "insert into Records values(".$code.", ".$severity.", '".$illness."', ".$verified.", '".$date."');";
+          $db_connection->query($query);
 
-      ?>
+          // Close the connection.
+          $db_connection->close();
 
-      <h1>The following data has been entered to the database:</h1>
+        ?>
 
-      <table border="1">
-        <tr>
-          <th>Illness</th>
-          <th>Building</th>
-          <th>Duration of Illness</th>
-          <th>Date in Building</th>
-          <th>Verified by Doctor</th>
-        </tr>
 
-        <tr>
-          <?php
-            print("<td>".$illness."</td>");
-            print("<td>".$building."</td>");
-            print("<td>".$duration."</td>");
-            print("<td>".$date."</td>");
-            print("<td>".$doctor."</td>");
-          ?>
-        </tr>
-      </table><br><br>
+        <center><table border="1">
+          <tr>
+            <th>Illness</th>
+            <th>Building</th>
+            <th>Duration of Illness</th>
+            <th>Date in Building</th>
+            <th>Verified by Doctor</th>
+          </tr>
 
-      <input type="submit" value="OK">
-    </form>
+          <tr>
+            <?php
+              print("<td>".$illness."</td>");
+              print("<td>".$building."</td>");
+              print("<td>".$duration."</td>");
+              print("<td>".$date."</td>");
+              print("<td>".$doctor."</td>");
+            ?>
+          </tr>
+        </table> </center>
+        <br>
+
+        <button type="submit" class="mainOption btn-primary" name="submit" style="margin: 5px">OK</button>
+
+      </form>
+    </div>
+  </div>
+
   </body>
 </html>
 
