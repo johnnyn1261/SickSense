@@ -12,13 +12,14 @@ if (isset($_POST["submitInfoButton"])) {
     // Connect to the database.
     $db_connection = new mysqli($host, $user, $password, $database);
 
-    // Query the database for the list of buildings.
+    // Query the database for specific dates and properties +
     $query = "SELECT *,SUM(Severity) as total FROM Buildings,records
-              WHERE Building.code = records.code AND records.date >= $date
+              WHERE Buildings.code = records.code AND records.date >= $date
               GROUP BY records.code ORDER BY total desc
                ;";
 
     $results = mysqli_query($db_connection, $query);
+
 
     $bottomPart .= "<h2>Report</h2>";
 
@@ -32,8 +33,8 @@ if (isset($_POST["submitInfoButton"])) {
 
     $count = 1;
 
-    // Display the buildings from the database.
-    while ($row = mysqli_fetch_array($results, MYSQLI_ASSOC)) {
+    // List entry of the query 
+    while ($row = mysqli_fetch_array($results, MYSQLI_BOTH)) {
         $bottomPart .= "<tr><td>{$count}</td><td>{$row['Code']}</td><td>{$row['Name']}</td><td>{$row['total']}</td></tr>";
         $count ++;
     }
@@ -47,7 +48,7 @@ if (isset($_POST["submitInfoButton"])) {
 
 $topPart = <<<EOBODY
 		<form action="{$_SERVER["PHP_SELF"]}" method="post">
-		<strong>Days back: </strong><input type="text" name="days" value="5" /><br><br>
+		<strong>Days back: </strong><input type="text" name="days" required /><br><br>
 
 			<input type="submit" name="submitInfoButton" /><br>
 		</form>
