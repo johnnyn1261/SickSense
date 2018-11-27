@@ -23,17 +23,17 @@ if (isset($_POST["submitInfoButton"]) || isset($_POST["submitInfo2"])) {
               GROUP BY records.code ORDER BY total desc
                ;";
 
-    
+
 
     } else{
-    
+
     // Query the database for specific dates and properties +
     $query = "SELECT *,COUNT(Illness) as total, records.Illness as k FROM Buildings,records
               WHERE Buildings.code = records.code AND records.date >= $date
               GROUP BY records.Illness ORDER BY total desc
                ;";
 
-    
+
     }
 
 
@@ -49,7 +49,7 @@ if (isset($_POST["submitInfoButton"]) || isset($_POST["submitInfo2"])) {
 
     $count = 1;
     $results = mysqli_query($db_connection, $query);
-    // List entry of the query 
+    // List entry of the query
     while ($row = mysqli_fetch_array($results, MYSQLI_BOTH)) {
       $bottomPart .= "<tr><td>{$count}</td><td>{$row['Code']}</td><td>{$row['k']}</td><td>{$row['total']}</td></tr>";
       array_push($dataPoints,array("label"=> $row['k'], "y"=> $row['total']));
@@ -59,12 +59,9 @@ if (isset($_POST["submitInfoButton"]) || isset($_POST["submitInfo2"])) {
      // Close the connection.
     $db_connection->close();
 
-    
-
-    
 
     $bottomPart .="</tr></table><br><br>";
-    $bottomPart .="<input type='button' onclick='pieChart()' value='More Info'><br><br>";
+    $bottomPart .="<button type='button' onclick='pieChart()' class='mainOption btn-primary' style='margin: 5px'>More Information</button>";
     $bottomPart .= "<div id='chartContainer'style='height: 370px; width: 100%;'></div>
     <script src='https://canvasjs.com/assets/script/canvasjs.min.js'></script>";
 
@@ -72,11 +69,14 @@ if (isset($_POST["submitInfoButton"]) || isset($_POST["submitInfo2"])) {
 
 $topPart = <<<EOBODY
 		<form action="{$_SERVER["PHP_SELF"]}" method="post">
-    <strong>Days back: </strong><input type="text" name="days" required /><br><br>
-      <input type="submit" name="submitInfoButton" value="Generate Building stats"/>
-      <input type="submit" name="submitInfo2" value="Generate Illness report "/>
-      <input type="button" name="back" value="Home" onclick="location.href = 'index.html';"> <br>
+    <strong>Days back: </strong><input type="number" name="days" required /><br><br>
+      <button type="submit" class="mainOption btn-primary" name="submitInfoButton" style="margin: 5px">Generate Building Stats</button>
+      <button type="submit" class="mainOption btn-primary" name="submitInfo2" style="margin: 5px">Generate Illness Report</button>
+      <button type="button" class="mainOption btn-primary" onclick="location.href = 'index.html';" name="back" style="margin: 5px">
+            <a href="index.html" style="text-decoration: none; color: #fff;">Home</a>
+      </button>
 
+      <br><br>
 		</form>
 EOBODY;
 $body = $topPart . $bottomPart;
@@ -87,12 +87,12 @@ echo $page;
 
  <script>
       function pieChart() {
-         
+
         var chart = new CanvasJS.Chart("chartContainer", {
             animationEnabled: true,
             exportEnabled: true,
             title:{
-                text: "Sicksense Statistaics"
+                text: "SickSense Statistaics"
             },
             subtitles: [{
                 text: "More info for the report "
@@ -108,6 +108,6 @@ echo $page;
             }]
         });
         chart.render();
-         
+
         }
    </script>

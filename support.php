@@ -20,7 +20,16 @@ function generatePage($body) {
         <link rel="stylesheet" href="css/bootstrap.css">
       </head>
       <body>
-        $body
+        <br>
+        <h1>SickSense</h1>
+        <div class="card">
+          <div class="card-body">
+            <center>
+              <h5 class="card-title">Filter Databse Entries</h5>
+              $body
+            </center>
+          </div>
+        </div>
       </body>
 
       <!-- JavaScripts -->
